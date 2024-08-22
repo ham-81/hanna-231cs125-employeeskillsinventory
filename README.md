@@ -9,4 +9,8 @@ This app was built on .NET framework using C#, HTML and JS languages. The data i
 
 ## Video submission
 
+## User Instructions
+- The code for the website can be found in the master branch.
+- 
+
 

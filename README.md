@@ -8,6 +8,7 @@ This app was built on .NET framework using C#, HTML and JS languages. The data i
 - Edit or delete existing records
 
 ## Video submission
+https://drive.google.com/file/d/1AwquoU-YJKqKoJRdG3OcjwYIdHRdTrho/view?usp=drive_link
 
 ## User Instructions
 

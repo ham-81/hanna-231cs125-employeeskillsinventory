@@ -1,0 +1,52 @@
+﻿@using Employee_Skill_Inventory.Data
+@using System.Security.Claims
+@using System.Globalization
+@page "/addemployee"
+@inject NavigationManager NavigationManager
+@inject IEmployeeService EmployeeService
+
+<h2>Add Employee</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@employee.EmployeeName" />
+            </div>
+            <div class="form-group">
+                <label for="Skill" class="control-label">Skill</label>
+                <input for="Skill" class="form-control" @bind="@employee.Skill" />
+            </div>
+            <div class="form-group">
+                <label for="Level" class="control-label">Skill Level</label>
+                <input for="Level" class="form-control" @bind="@employee.SkillLevel" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <button class="btn btn-primary" @onclick="@CreateEmployee" value="Save">Save</button>
+                <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+    Employee employee = new Employee();
+
+    public async Task CreateEmployee()
+    {
+        employee.LastUpdated = DateTime.Now.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
+        await EmployeeService.CreateEmployee(employee);
+
+        NavigationManager.NavigateTo("listemployees");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listemployees");
+    }
+}

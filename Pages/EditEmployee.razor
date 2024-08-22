@@ -1,0 +1,69 @@
+﻿@using Employee_Skill_Inventory.Data
+@using System.Security.Claims
+@using System.Globalization
+@page "/editemployee/{id:int}"
+@inject NavigationManager NavigationManager
+@inject IEmployeeService EmployeeService
+
+<h2>Edit Employee</h2>
+<hr />
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@employee.EmployeeName" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Skill" class="control-label">Skill</label>
+                <input form="Skill" class="form-control" @bind="@employee.Skill" />
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Level" class="control-label">Skill Level</label>
+                <input form="Level" class="form-control" @bind="@employee.SkillLevel" />
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <button class="btn btn-primary" @onclick="@UpdateEmployee" value="Update">Update</button>
+                <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    Employee employee = new Employee();
+
+    protected async override Task OnInitializedAsync()
+    {
+        employee = await EmployeeService.SingleEmployee(id);
+    }
+
+    public async Task UpdateEmployee()
+    {
+        employee.LastUpdated = DateTime.Now.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
+        await EmployeeService.EditEmployee(id, employee);
+        NavigationManager.NavigateTo("listemployees");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listemployees");
+    }
+}
+

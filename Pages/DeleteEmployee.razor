@@ -1,0 +1,60 @@
+﻿@using Employee_Skill_Inventory.Data
+@using System.Security.Claims
+@using System.Globalization
+@page "/deleteemployee/{id:int}"
+@inject NavigationManager NavigationManager
+@inject IEmployeeService EmployeeService
+
+<h2>Delete Employee</h2>
+<p>Are you sure you want to delete the employee with Id: <b>@id</b></p>
+<br />
+<div class="col-md-4">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>@employee.EmployeeName</td>
+        </tr>
+        <tr>
+            <td>Skill</td>
+            <td>@employee.Skill</td>
+        </tr>
+        <tr>
+            <td>Skill Level</td>
+            <td>@employee.SkillLevel</td>
+        </tr>
+        <tr>
+            <td>Last Updated</td>
+            <td>@employee.LastUpdated</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <button class="btn btn-primary" @onclick="@Delete" value="Delete">Delete</button>
+        <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    Employee employee = new Employee();
+
+    protected async override Task OnInitializedAsync()
+    {
+        employee = await EmployeeService.SingleEmployee(id);
+
+    }
+
+    public async Task Delete()
+    {
+        await EmployeeService.DeleteEmployee(id);
+
+        NavigationManager.NavigateTo("listemployees");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("listemployees");
+    }
+}
+
+

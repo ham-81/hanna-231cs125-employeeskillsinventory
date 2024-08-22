@@ -10,7 +10,17 @@ This app was built on .NET framework using C#, HTML and JS languages. The data i
 ## Video submission
 
 ## User Instructions
-- The code for the website can be found in the master branch.
-- 
+
+Ensure the following are installed:
+
+- .NET SDK 6.0 or later
+- Visual Studio 2022 or later with ASP.NET framework
+- SQL Server
+
+Update the connection string in appsettings.json with your database details.
+
+Run the application! Navigation links to all the CRUD operations are available on the home page.
+
+
 
 

@@ -19,6 +19,8 @@ Ensure the following are installed:
 
 Update the connection string in appsettings.json with your database details.
 
+Run the 'dotnet restore' command to restore the project dependencies:
+
 Run the application! Navigation links to all the CRUD operations are available on the home page.
 
 
